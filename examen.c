@@ -10,6 +10,7 @@ struct alumno
 
 int main(int argc, char const *argv[])
 {
+    
     int i;
     int h=0;
     struct alumno a[200];
@@ -23,8 +24,7 @@ int main(int argc, char const *argv[])
         switch (i)
         {
         case 1:
-        FILE *archivo;
-        archivo=fopen("datos.txt","a");
+        
             printf("Ingresar alumnos \n");
             printf("Ingrese la matricula \n");
             scanf("%d", &a[h].matricula);
@@ -38,32 +38,16 @@ int main(int argc, char const *argv[])
             printf("Ingrese la nota \n");
             scanf("%f", &a[h].nota); 
             fflush(stdin);
-            if (archivo!=NULL)
-        {
-            printf(a[h].matricula,archivo);
-            fputs(a[h].nombre,archivo);
-            fputs(a[h].direccion,archivo);
-            fputs(a[h].materia,archivo);
             
-
-        }else
-        {
-            while (!feof(archivo));
-            {
-                printf(a[h].matricula,archivo);
-                fputs(a[h].nombre,archivo);
-                fputs(a[h].direccion,archivo);
-                fputs(a[h].materia,archivo);
-            }
             
-        }
-        
-            fclose(archivo);
             h++;
             break; 
         case 2:
             printf("Mostrar alumnos \n");
-
+            FILE *archivo;
+            archivo=fopen("datos.txt","r");
+            printf("estos son los datos");
+            fclose(archivo);
             break;
         case 3:
             printf("Gracias por usar el programa \n");
@@ -73,10 +57,35 @@ int main(int argc, char const *argv[])
             break;
         }
     } while (i!=3);
-    
+    FILE *archivo;
+            archivo=fopen("datos.txt","a+");
+            if (archivo!=NULL)
+            {
+                
+                printf(a[h].matricula,archivo);
+                
+                fputs(a[h].nombre,archivo);
+                
+                fputs(a[h].direccion,archivo);
+                
+                fputs(a[h].materia,archivo);
+                
+                
 
-        
-        
-
+            }else
+            {
+                if (archivo!=NULL)
+                {
+                    while (!feof(archivo));
+                {
+                    printf(a[h].matricula,archivo);
+                    fputs(a[h].nombre,archivo);
+                    fputs(a[h].direccion,archivo);
+                    fputs(a[h].materia,archivo);
+                }
+                }
+            }
+            
+            fclose(archivo);
     return 0;
 }
