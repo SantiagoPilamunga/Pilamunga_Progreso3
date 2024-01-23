@@ -11,31 +11,71 @@ struct alumno
 int main(int argc, char const *argv[])
 {
     int i;
+    int h=0;
     struct alumno a[200];
     do
     {
-        printf("Seleccione una opcion: ");
-        printf("1. Ingresar un nuevo alumno");
-        printf("2. Mostrar los alumnos");
-        printf("3. Salir del programa");
+        printf("Seleccione una opcion: \n");
+        printf("1. Ingresar un nuevo alumno \n");
+        printf("2. Mostrar los alumnos \n");
+        printf("3. Salir del programa \n");
         scanf("%d", &i);
         switch (i)
         {
         case 1:
-            printf("Ingresar alumnos");
-            break;
+        FILE *archivo;
+        archivo=fopen("datos.txt","a");
+            printf("Ingresar alumnos \n");
+            printf("Ingrese la matricula \n");
+            scanf("%d", &a[h].matricula);
+            fflush(stdin);
+            printf("Ingrese el nombre del alumno \n");
+            fgets(a[h].nombre, sizeof a[h].nombre, stdin);
+            printf("Ingrese la direccion \n");
+            fgets(a[h].direccion, sizeof a[h].direccion, stdin);
+            printf("Ingrese la materia \n");
+            fgets(a[h].materia, sizeof a[h].materia, stdin);
+            printf("Ingrese la nota \n");
+            scanf("%f", &a[h].nota); 
+            fflush(stdin);
+            if (archivo!=NULL)
+        {
+            printf(a[h].matricula,archivo);
+            fputs(a[h].nombre,archivo);
+            fputs(a[h].direccion,archivo);
+            fputs(a[h].materia,archivo);
+            
+
+        }else
+        {
+            while (!feof(archivo));
+            {
+                printf(a[h].matricula,archivo);
+                fputs(a[h].nombre,archivo);
+                fputs(a[h].direccion,archivo);
+                fputs(a[h].materia,archivo);
+            }
+            
+        }
+        
+            fclose(archivo);
+            h++;
+            break; 
         case 2:
-            printf("Mostrar alumnos");
+            printf("Mostrar alumnos \n");
+
             break;
         case 3:
-            printf("Gracias por usar el programa");
+            printf("Gracias por usar el programa \n");
             break;
         default:
-            printf("La opcion no existe");
+            printf("La opcion no existe \n");
             break;
         }
     } while (i!=3);
     
+
+        
         
 
     return 0;
